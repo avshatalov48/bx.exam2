@@ -1,0 +1,5 @@
+{
+    "require-dev": {
+        "symfony/var-dumper": "^3.4"
+    }
+}
