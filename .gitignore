@@ -4,3 +4,4 @@
 !/bitrix/php_interface/after_connect_d7.php
 /upload
 /local/vendor
+/local/composer.phar
