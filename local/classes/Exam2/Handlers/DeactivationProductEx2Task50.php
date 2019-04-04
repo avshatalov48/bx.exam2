@@ -6,6 +6,12 @@ use Bitrix\Main\Localization\Loc;
 
 Loc::LoadMessages(__FILE__);
 
+/**
+ * [ex2-50] Проверка при деактивации товара
+ *
+ * Class DeactivationProductEx2Task50
+ * @package Exam2\Handlers
+ */
 class DeactivationProductEx2Task50
 {
     public static function onBeforeIBlockElementUpdateHandler(&$arFields)
