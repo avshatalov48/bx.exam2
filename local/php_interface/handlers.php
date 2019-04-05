@@ -23,3 +23,13 @@ EventManager::getInstance()->addEventHandler(
         "onBeforeEventAddHandler"
     ]
 );
+
+// [ex2-95] Упростить меню в адмистративном разделе для контент-менеджера
+EventManager::getInstance()->addEventHandler(
+    "main",
+    "OnBuildGlobalMenu",
+    [
+        "Exam2\Handlers\ContentMenuEx2Task95",
+        "onBuildGlobalMenuHandler"
+    ]
+);
