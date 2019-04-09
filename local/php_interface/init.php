@@ -24,3 +24,10 @@ if (file_exists(ROOT_DIR . '/local/php_interface/consts.php')) {
 if (file_exists(ROOT_DIR . '/local/php_interface/handlers.php')) {
     require_once(ROOT_DIR . '/local/php_interface/handlers.php');
 }
+
+/**
+ * Задания
+ */
+if (file_exists(ROOT_DIR . '/local/php_interface/tasks.php')) {
+    require_once(ROOT_DIR . '/local/php_interface/tasks.php');
+}

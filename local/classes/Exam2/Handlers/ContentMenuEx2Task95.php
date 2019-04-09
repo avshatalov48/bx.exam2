@@ -17,7 +17,7 @@ class ContentMenuEx2Task95
     public static function onBuildGlobalMenuHandler(&$aGlobalMenu, &$aModuleMenu)
     {
         global $USER;
-        // Если пользователь принадлежит "Контент-редакторы" (5) и не принадлежит "Администраторы" (1)
+        // Если пользователь принадлежит группе "Контент-редакторы" (5) и не принадлежит группе "Администраторы" (1)
         // тогда, убираем пункты меню
         if (in_array(5, $USER->GetUserGroupArray()) && !in_array(1, $USER->GetUserGroupArray())) {
             // Пункт меню "Рабочий стол"
