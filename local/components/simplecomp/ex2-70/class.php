@@ -17,12 +17,12 @@ class Simplecomp extends CBitrixComponent
     public function onPrepareComponentParams($arParams)
     {
         // Приводим значения к числу
-        $this->arParams["IBLOCK_CATALOG_ID"] = (int)$this->arParams["IBLOCK_CATALOG_ID"];
-        $this->arParams["IBLOCK_NEWS_ID"] = (int)$this->arParams["IBLOCK_NEWS_ID"];
+        $arParams["IBLOCK_CATALOG_ID"] = (int)$arParams["IBLOCK_CATALOG_ID"];
+        $arParams["IBLOCK_NEWS_ID"] = (int)$arParams["IBLOCK_NEWS_ID"];
 
         // Значение по умолчанию
-        if (!$this->arParams["CACHE_TIME"]) {
-            $this->arParams["CACHE_TIME"] = 3600;
+        if (!$arParams["CACHE_TIME"]) {
+            $arParams["CACHE_TIME"] = 3600;
         }
 
         return parent::onPrepareComponentParams($arParams);
@@ -113,7 +113,7 @@ class Simplecomp extends CBitrixComponent
         while ($arRes = $res->Fetch()) {
             $this->arResult["ITEMS"][$i] = $arRes;
             foreach ($arTotal as &$arSection2) {
-                foreach ($arSection2["UF_NEWS_LINK"] as $item) {
+                foreach ($arSection2[$this->arParams["USER_PROPERTY"]] as $item) {
                     if ($item == $arRes["ID"]) {
                         $this->arResult["ITEMS"][$i]["ITEMS"][] = $arSection2;
                     }
@@ -136,7 +136,7 @@ class Simplecomp extends CBitrixComponent
 
         if ($this->StartResultCache()) {
             $this->setArResult();
-            // Список ключей массива $arResult, которые должны кэшироваться при использовании встроенного кэширования компонентов
+            // Список ключей массива $arResult, которые должны кэшироваться при использовании встроенного кэширования компонентов, иначе закеширует весь массив arResult, кэш сильно разростается
             $this->setResultCacheKeys(["COUNT"]);
             $this->includeComponentTemplate();
         }
