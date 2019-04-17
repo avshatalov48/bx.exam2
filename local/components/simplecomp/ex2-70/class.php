@@ -57,7 +57,7 @@ class Simplecomp extends CBitrixComponent
         // </Выборка разделов из ИБ "Продукция">
 
 
-        // <Выборка элементов из ИБ "Продукция">
+        // <Выборка товаров из ИБ "Продукция">
         $arFilter = [
             "IBLOCK_ID" => $this->arParams["IBLOCK_CATALOG_ID"],
             "ACTIVE" => "Y",
@@ -78,7 +78,9 @@ class Simplecomp extends CBitrixComponent
         $res = CIBlockElement::GetList([], $arFilter, false, false, $arSelect);
 
         $iCount = 0;
+        $arAllPrice = [];
         while ($arRes = $res->Fetch()) {
+            $arAllPrice[] = $arRes["PROPERTY_PRICE_VALUE"];
             foreach ($arTotal as &$arSection) {
                 if ($arRes["IBLOCK_SECTION_ID"] == $arSection["ID"]) {
                     // Добавляем элементы к секциям
@@ -87,11 +89,14 @@ class Simplecomp extends CBitrixComponent
             }
             $iCount++;
         }
+        // </Выборка товаров из ИБ "Продукция">
 
-        // </Выборка элементов из ИБ "Продукция">
+        // Минимальная цена
+        $this->arResult["MIN_PRICE"] = min($arAllPrice);
+        // Максимальная цена
+        $this->arResult["MAX_PRICE"] = max($arAllPrice);
 
-
-        // Количество элементов
+        // Количество товаров
         $this->arResult["COUNT"] = $iCount;
 
         // <Выборка элементов из ИБ "Новости">
@@ -137,11 +142,27 @@ class Simplecomp extends CBitrixComponent
         if ($this->StartResultCache()) {
             $this->setArResult();
             // Список ключей массива $arResult, которые должны кэшироваться при использовании встроенного кэширования компонентов, иначе закеширует весь массив arResult, кэш сильно разростается
-            $this->setResultCacheKeys(["COUNT"]);
+            $this->setResultCacheKeys(
+                [
+                    "COUNT",
+                    "MIN_PRICE",
+                    "MAX_PRICE",
+                ]
+            );
             $this->includeComponentTemplate();
         }
 
         global $APPLICATION;
         $APPLICATION->SetTitle(GetMessage("EX2_70_ELEMENTS_COUNT") . $this->arResult["COUNT"]);
+
+        // AddViewContent - позволяет указать место вывода контента, создаваемого ниже по коду с помощью метода ShowViewContent.
+        $APPLICATION->AddViewContent(
+            "min_price",
+            GetMessage("EX2_70_MIN_PRICE") . $this->arResult["MIN_PRICE"]
+        );
+        $APPLICATION->AddViewContent(
+            "max_price",
+            GetMessage("EX2_70_MAX_PRICE") . $this->arResult["MAX_PRICE"]
+        );
     }
 }
