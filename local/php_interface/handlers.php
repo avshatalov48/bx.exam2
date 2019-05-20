@@ -1,6 +1,6 @@
 <?php
 /**
- * Обработчики
+ * Обработчики событий
  */
 use Bitrix\Main\EventManager;
 
@@ -31,5 +31,17 @@ EventManager::getInstance()->addEventHandler(
     [
         "Exam2\Handlers\ContentMenuEx2Task95",
         "onBuildGlobalMenuHandler"
+    ]
+);
+
+// [ex2-93] Записывать в Журнал событий - открытие не существующих страниц сайта
+// Событие вызывается в конце визуальной части эпилога сайта
+// @see https://dev.1c-bitrix.ru/api_help/main/events/onepilog.php
+EventManager::getInstance()->addEventHandler(
+    "main",
+    "OnEpilog",
+    [
+        "Exam2\Handlers\Check404Ex2Task93",
+        "onEpilogHandler"
     ]
 );
