@@ -30,6 +30,8 @@ class Simplecomp extends CBitrixComponent
 
     public function setArResult()
     {
+        global $APPLICATION;
+
         // <Выборка разделов из ИБ "Продукция">
         $arFilter = [
             "IBLOCK_ID" => $this->arParams["IBLOCK_CATALOG_ID"],
@@ -47,13 +49,13 @@ class Simplecomp extends CBitrixComponent
 
         $res = CIBlockSection::GetList([], $arFilter, false, $arSelect);
 
-        $arTotal = [];
+        $arProductSectionsTotal = [];
         while ($arRes = $res->Fetch()) {
-            $arTotal[] = $arRes;
+            $arProductSectionsTotal[] = $arRes;
         }
 
         // array_column — Возвращает массив из значений одного столбца входного массива
-        $arSectionId = array_column($arTotal, "ID");
+        $arProductSectionsId = array_column($arProductSectionsTotal, "ID");
         // </Выборка разделов из ИБ "Продукция">
 
 
@@ -62,7 +64,7 @@ class Simplecomp extends CBitrixComponent
             "IBLOCK_ID" => $this->arParams["IBLOCK_CATALOG_ID"],
             "ACTIVE" => "Y",
             // Выбирем элементы только по необходимым разделам
-            $this->arParams["USER_PROPERTY"] => $arSectionId,
+            $this->arParams["USER_PROPERTY"] => $arProductSectionsId,
         ];
 
         $arSelect = [
@@ -80,21 +82,51 @@ class Simplecomp extends CBitrixComponent
         $iCount = 0;
         $arAllPrice = [];
         while ($arRes = $res->Fetch()) {
+            // Массив всех цен товаров
             $arAllPrice[] = $arRes["PROPERTY_PRICE_VALUE"];
-            foreach ($arTotal as &$arSection) {
+            // Все ID товаров
+            $arAllId[] = $arRes["ID"];
+            foreach ($arProductSectionsTotal as &$arSection) {
                 if ($arRes["IBLOCK_SECTION_ID"] == $arSection["ID"]) {
-                    // Добавляем элементы к секциям
+                    // <ex2-58>
+                    $arButtons = CIBlock::GetPanelButtons(
+                        $arRes["IBLOCK_ID"],
+                        $arRes["ID"],
+                        0,
+                        array("SECTION_BUTTONS" => false, "SESSID" => false)
+                    );
+                    $arRes["EDIT_LINK"] = $arButtons["edit"]["edit_element"]["ACTION_URL"];
+                    $arRes["DELETE_LINK"] = $arButtons["edit"]["delete_element"]["ACTION_URL"];
+                    // </ex2-58>
+
+                    // Добавляем элементы товаров к секциям
                     $arSection["ITEMS"][] = $arRes;
                 }
             }
             $iCount++;
         }
+
+        // <ex2-58>
+        // Возвращает "true", если кнопка "Показать включаемые области" на панели управления нажата, в противном случае - "false".
+        if ($APPLICATION->GetShowIncludeAreas()) {
+            // Метод возвращает массив, описывающий набор кнопок для управления элементами инфоблока
+            $arButtons = CIBlock::GetPanelButtons(
+                $this->arParams["IBLOCK_CATALOG_ID"],
+                0
+            );
+            // Добавляет массив новых кнопок к тем кнопкам компонента, которые отображаются в области компонента в режиме редактирования сайта.
+            $this->addIncludeAreaIcons(CIBlock::GetComponentMenu($APPLICATION->GetPublicShowMode(), $arButtons));
+        }
+        // </ex2-58>
+
         // </Выборка товаров из ИБ "Продукция">
 
         // Минимальная цена
         $this->arResult["MIN_PRICE"] = min($arAllPrice);
         // Максимальная цена
         $this->arResult["MAX_PRICE"] = max($arAllPrice);
+        // Максимальный ID элемента товаров
+        $this->arResult["MAX_ELEMENT_ID"] = max($arAllId);
 
         // Количество товаров
         $this->arResult["COUNT"] = $iCount;
@@ -116,8 +148,23 @@ class Simplecomp extends CBitrixComponent
 
         $i = 0;
         while ($arRes = $res->Fetch()) {
+            // <ex2-58>
+            /*
+             * Отключаем управление разделами, по заданию
+             *
+            $arButtons = CIBlock::GetPanelButtons(
+                $arRes["IBLOCK_ID"],
+                $arRes["ID"],
+                0,
+                array("SECTION_BUTTONS" => false, "SESSID" => false)
+            );
+            */
+            $arRes["EDIT_LINK"] = $arButtons["edit"]["edit_element"]["ACTION_URL"];
+            $arRes["DELETE_LINK"] = $arButtons["edit"]["delete_element"]["ACTION_URL"];
+            // </ex2-58>
+
             $this->arResult["ITEMS"][$i] = $arRes;
-            foreach ($arTotal as &$arSection2) {
+            foreach ($arProductSectionsTotal as &$arSection2) {
                 foreach ($arSection2[$this->arParams["USER_PROPERTY"]] as $item) {
                     if ($item == $arRes["ID"]) {
                         $this->arResult["ITEMS"][$i]["ITEMS"][] = $arSection2;
@@ -126,6 +173,24 @@ class Simplecomp extends CBitrixComponent
             }
             $i++;
         }
+
+        // <ex2-58>
+        // Возвращает "true", если кнопка "Показать включаемые области" на панели управления нажата, в противном случае - "false".
+        /*
+         * Отключаем управление разделами, по заданию
+         *
+        if ($APPLICATION->GetShowIncludeAreas()) {
+            // Метод возвращает массив, описывающий набор кнопок для управления элементами инфоблока
+            $arButtons = CIBlock::GetPanelButtons(
+                $this->arParams["IBLOCK_NEWS_ID"],
+                0
+            );
+            // Добавляет массив новых кнопок к тем кнопкам компонента, которые отображаются в области компонента в режиме редактирования сайта.
+            $this->addIncludeAreaIcons(CIBlock::GetComponentMenu($APPLICATION->GetPublicShowMode(), $arButtons));
+        }
+        */
+        // </ex2-58>
+
         // </Выборка элементов из ИБ "Новости">
     }
 
