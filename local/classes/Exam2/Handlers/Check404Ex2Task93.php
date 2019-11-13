@@ -21,12 +21,13 @@ class Check404Ex2Task93
             global $APPLICATION;
 
             \CEventLog::Add(
-                array(
-                    "SEVERITY" => "INFO",
+                [
+                    "SEVERITY"      => "INFO",
                     "AUDIT_TYPE_ID" => "ERROR_404",
-                    "MODULE_ID" => "main",
-                    "DESCRIPTION" => $APPLICATION->GetCurPage(),
-                )
+                    "MODULE_ID"     => "main",
+                    // Возвращает путь к текущей странице относительно корня вместе с параметрами
+                    "DESCRIPTION"   => $APPLICATION->GetCurUri(),
+                ]
             );
         }
     }

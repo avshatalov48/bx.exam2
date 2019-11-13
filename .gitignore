@@ -3,5 +3,6 @@
 !/bitrix/php_interface/after_connect.php
 !/bitrix/php_interface/after_connect_d7.php
 /upload
+/temp
 /local/vendor
 /local/composer.phar
