@@ -34,7 +34,7 @@ $iElementId = $arResult["MAX_ELEMENT_ID"];
         <div>
             <li>
                 <b><?= $arItem["NAME"] ?></b> - <?= $arItem["DATE_ACTIVE_FROM"] ?>
-                <!-- Вывод секций -->
+                <!-- Вывод секций в скобках -->
                 <? if (!empty($arItem["ITEMS"])): ?>
                     (
                     <? foreach ($arItem["ITEMS"] as $iKey => $arSection): ?>
@@ -46,7 +46,7 @@ $iElementId = $arResult["MAX_ELEMENT_ID"];
                     <? endforeach; ?>
                     )
                 <? endif; ?>
-                <!-- Вывод товаров -->
+                <!-- Вывод товаров по пунктам -->
                 <ul>
                     <? foreach ($arItem["ITEMS"] as $iKey => $arSection): ?>
                         <? foreach ($arSection["ITEMS"] as $arElement): ?>

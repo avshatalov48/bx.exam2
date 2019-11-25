@@ -20,7 +20,7 @@ class Simplecomp extends CBitrixComponent
         $arParams["IBLOCK_CATALOG_ID"] = (int)$arParams["IBLOCK_CATALOG_ID"];
         $arParams["IBLOCK_NEWS_ID"] = (int)$arParams["IBLOCK_NEWS_ID"];
 
-        // Значение по умолчанию
+        // Значение по умолчанию, не обязательно, но желательно
         if (!$arParams["CACHE_TIME"]) {
             $arParams["CACHE_TIME"] = 3600;
         }
@@ -28,6 +28,9 @@ class Simplecomp extends CBitrixComponent
         return parent::onPrepareComponentParams($arParams);
     }
 
+    /**
+     * Производим выборку
+     */
     public function setArResult()
     {
         global $APPLICATION;
@@ -35,6 +38,7 @@ class Simplecomp extends CBitrixComponent
         // <Выборка разделов из ИБ "Продукция">
         $arFilter = [
             "IBLOCK_ID" => $this->arParams["IBLOCK_CATALOG_ID"],
+            // Должны выбираться только активные разделы
             "ACTIVE" => "Y",
             // Фильтрация только разделов с новостями
             "!" . $this->arParams["USER_PROPERTY"] => false,
@@ -59,7 +63,7 @@ class Simplecomp extends CBitrixComponent
         // </Выборка разделов из ИБ "Продукция">
 
 
-        // <Выборка товаров из ИБ "Продукция">
+        // <Выборка товаров из ИБ "Продукция" по выбранным разделам>
         $arFilter = [
             "IBLOCK_ID" => $this->arParams["IBLOCK_CATALOG_ID"],
             "ACTIVE" => "Y",
@@ -119,12 +123,15 @@ class Simplecomp extends CBitrixComponent
         }
         // </ex2-58>
 
-        // </Выборка товаров из ИБ "Продукция">
+        // </Выборка товаров из ИБ "Продукция" по выбранным разделам>
 
+        // <ex2-82>
         // Минимальная цена
         $this->arResult["MIN_PRICE"] = min($arAllPrice);
         // Максимальная цена
         $this->arResult["MAX_PRICE"] = max($arAllPrice);
+        // </ex2-82>
+
         // Максимальный ID элемента товаров
         $this->arResult["MAX_ELEMENT_ID"] = max($arAllId);
 
@@ -220,6 +227,7 @@ class Simplecomp extends CBitrixComponent
         global $APPLICATION;
         $APPLICATION->SetTitle(GetMessage("EX2_70_ELEMENTS_COUNT") . $this->arResult["COUNT"]);
 
+        // ex2-82
         // AddViewContent - позволяет указать место вывода контента, создаваемого ниже по коду с помощью метода ShowViewContent.
         $APPLICATION->AddViewContent(
             "min_price",

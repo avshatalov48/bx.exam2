@@ -138,6 +138,7 @@ $APPLICATION->IncludeComponent("bitrix:search.form", "flat", Array(
 					</div>
 				</div>
 
+                <!-- <ex2-82> -->
                 <div style="color:red; margin: 34px 15px 35px 15px">
                     <div>
                         <?= $APPLICATION->ShowViewContent('min_price'); ?>
@@ -146,6 +147,7 @@ $APPLICATION->IncludeComponent("bitrix:search.form", "flat", Array(
                         <?= $APPLICATION->ShowViewContent('max_price'); ?>
                     </div>
                 </div>
+                <!-- </ex2-82> -->
 
 				<div class="information-block">
 					<div class="top"></div>
