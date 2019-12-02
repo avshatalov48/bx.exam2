@@ -2,13 +2,13 @@
 
 [![Donate](https://img.shields.io/badge/Donate-Yandex.Money-green.svg)](https://money.yandex.ru/to/410013131142938)
 
-* [Задания](./wiki/tasks/tasks.md)
+* [Задания и решения](./wiki/tasks/tasks.md)
 
 * [Полезные ссылки](./wiki/others/useful.md)
 
 ## Резервные копии
 
-* [Архив](https://yadi.sk/d/s93lr3K1t4esPQ)
+* [Резервные копии](https://yadi.sk/d/s93lr3K1t4esPQ)
 
 * [restore.php](http://www.1c-bitrix.ru/download/scripts/restore.php)
 
