@@ -208,8 +208,24 @@ class Simplecomp extends CBitrixComponent
     public function executeComponent()
     {
         if (!Loader::includeModule("iblock")) {
+            ShowError(GetMessage("EX2_70_IB_CHECK"));
             return;
         }
+
+        // <ex2-100>
+        // Метод возвращает массив, описывающий набор кнопок для управления элементами инфоблока
+        $arButtons = CIBlock::GetPanelButtons($this->arParams["IBLOCK_CATALOG_ID"]);
+
+        // Добавляет новую кнопку к тем кнопкам компонента, которые отображаются в области компонента в режиме редактирования сайта
+        $this->AddIncludeAreaIcon(
+            [
+                "TITLE"          => GetMessage("EX2_100_SUBMENU_TITLE"),
+                "URL"            => $arButtons['submenu']['element_list']['ACTION_URL'],
+                // Показать в контекстном меню
+                "IN_PARAMS_MENU" => true,
+            ]
+        );
+        // </ex2-100>
 
         if ($this->StartResultCache()) {
             $this->setArResult();
@@ -231,11 +247,11 @@ class Simplecomp extends CBitrixComponent
         // AddViewContent - позволяет указать место вывода контента, создаваемого ниже по коду с помощью метода ShowViewContent.
         $APPLICATION->AddViewContent(
             "min_price",
-            GetMessage("EX2_70_MIN_PRICE") . $this->arResult["MIN_PRICE"]
+            GetMessage("EX2_82_MIN_PRICE") . $this->arResult["MIN_PRICE"]
         );
         $APPLICATION->AddViewContent(
             "max_price",
-            GetMessage("EX2_70_MAX_PRICE") . $this->arResult["MAX_PRICE"]
+            GetMessage("EX2_82_MAX_PRICE") . $this->arResult["MAX_PRICE"]
         );
     }
 }

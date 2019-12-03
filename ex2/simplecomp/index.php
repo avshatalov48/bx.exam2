@@ -1,6 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Простой компонент: [ex2-70], [ex2-58], [ex2-82]");
+$APPLICATION->SetTitle("Простой компонент: [ex2-70], [ex2-58], [ex2-82], [ex2-100]");
 ?>
 
 <?$APPLICATION->IncludeComponent(
