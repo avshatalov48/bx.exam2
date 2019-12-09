@@ -31,3 +31,10 @@ if (file_exists(ROOT_DIR . '/local/php_interface/handlers.php')) {
 if (file_exists(ROOT_DIR . '/local/php_interface/tasks.php')) {
     require_once(ROOT_DIR . '/local/php_interface/tasks.php');
 }
+
+/**
+ * Агенты
+ */
+if (file_exists(ROOT_DIR . '/local/php_interface/agents.php')) {
+    require_once(ROOT_DIR . '/local/php_interface/agents.php');
+}
