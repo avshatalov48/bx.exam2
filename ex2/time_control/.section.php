@@ -1,5 +1,5 @@
 <?
-$sSectionName = "Оценка производительности: [ex2-10]";
+$sSectionName = "Оценка производительности";
 $arDirProperties = Array(
 
 );
