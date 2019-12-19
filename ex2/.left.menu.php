@@ -21,26 +21,33 @@ $aMenuLinks = Array(
 		Array(), 
 		"" 
 	),
-    Array(
-        "Оценка производительности: [ex2-10]",
-        "/ex2/time_control/",
-        Array(),
-        Array(),
-        ""
-    ),
-    Array(
-        "Оценка производительности: [ex2-11]",
-        "/ex2/time_control/ex2-11.php",
-        Array(),
-        Array(),
-        ""
-    ),
-    Array(
-        "Оценка производительности: [ex2-88]",
-        "/ex2/time_control/ex2-88.php",
-        Array(),
-        Array(),
-        ""
-    )
+	Array(
+		"Оценка производительности: [ex2-10]", 
+		"/ex2/time_control/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Оценка производительности: [ex2-11]", 
+		"/ex2/time_control/ex2-11.php", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Оценка производительности: [ex2-88]", 
+		"/ex2/time_control/ex2-88.php", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Второй сайт", 
+		"/ex2/site2/", 
+		Array(), 
+		Array(), 
+		"" 
+	)
 );
 ?>

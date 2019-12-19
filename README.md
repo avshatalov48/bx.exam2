@@ -1,4 +1,4 @@
-# Экзамен «№2 Основные технологии, расширение типовых возможностей системы» (Версия 4.0.4, 27.02.2019)
+# Готовый экзамен «№2 Основные технологии, расширение типовых возможностей системы» (Версия 4.0.4, 27.02.2019)
 
 [![Donate](https://img.shields.io/badge/Donate-Yandex.Money-green.svg)](https://money.yandex.ru/to/410013131142938)
 
@@ -9,6 +9,8 @@
 ## Резервные копии
 
 * [Резервные копии](https://yadi.sk/d/s93lr3K1t4esPQ)
+
+* [Бэкапы БД](https://github.com/avshatalov48/bx.exam2/tree/master/bitrix/backup)
 
 * [restore.php](http://www.1c-bitrix.ru/download/scripts/restore.php)
 
