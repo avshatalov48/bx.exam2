@@ -8,5 +8,9 @@ $MESS["T_IBLOCK_DESC_NEWS_SHARE_TEMPLATE"] = "Шаблон компонента 
 $MESS["T_IBLOCK_DESC_NEWS_SHARE_SYSTEM"] = "Используемые соц. закладки и сети";
 $MESS["T_IBLOCK_DESC_NEWS_SHARE_SHORTEN_URL_LOGIN"] = "Логин для bit.ly";
 $MESS["T_IBLOCK_DESC_NEWS_SHARE_SHORTEN_URL_KEY"] = "Ключ для для bit.ly";
+// ex2-34
 $MESS["SPECIALDATE"] = "Установить свойство страницы specialdate";
+// ex2-108
 $MESS["CANONICAL"] = "ID информационного блока для rel=canonical";
+// ex2-104
+$MESS["REPORT_AJAX"] = "Собирать жалобы в режиме AJAX";

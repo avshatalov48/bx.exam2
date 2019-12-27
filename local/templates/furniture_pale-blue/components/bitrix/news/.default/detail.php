@@ -36,8 +36,10 @@
 		"ELEMENT_ID" => $arResult["VARIABLES"]["ELEMENT_ID"],
 		"ELEMENT_CODE" => $arResult["VARIABLES"]["ELEMENT_CODE"],
 		"IBLOCK_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["news"],
-
+        // ex2-108
         "CANONICAL" => $arParams["CANONICAL"],
+        // ex2-104
+        "REPORT_AJAX" => $arParams['REPORT_AJAX'],
 	),
 	$component
 );?>

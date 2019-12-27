@@ -6,9 +6,47 @@
 	<?if($arParams["DISPLAY_DATE"]!="N" && $arResult["DISPLAY_ACTIVE_FROM"]):?>
 		<div class="news-date"><?=$arResult["DISPLAY_ACTIVE_FROM"]?></div>
 	<?endif;?>
-	<?if($arParams["DISPLAY_NAME"]!="N" && $arResult["NAME"]):?>
-		<h3><?=$arResult["NAME"]?></h3>
-	<?endif;?>
+    <? if ($arParams["DISPLAY_NAME"] != "N" && $arResult["NAME"]): ?>
+        <h3><?= $arResult["NAME"] ?>
+            <? // <ex2-104> ?>
+            <? if ($arParams['REPORT_AJAX'] == 'Y'): ?>
+                <? //<Работа в режиме Ajax> ?>
+                <script>
+                    (function (BX) {
+                        BX.ready(function () {
+                            var ajaxReportBtn = document.getElementById('ajax-report');
+                            var textElem = document.getElementById('ajax-report-text');
+                            ajaxReportBtn.onclick = function () {
+                                BX.ajax.loadJSON(
+                                    '<?=$APPLICATION->GetCurPage()?>',
+                                    {'TYPE': 'REPORT_AJAX', 'ID': <?=$arResult['ID']?>},
+                                    function (data) {
+                                        textElem.innerText = "Ваше мнение учтено, №" + data['ID'];
+                                    },
+                                    function (data) {
+                                        // Обработчик ошибочной ситуации
+                                        textElem.innerText = "Ошибка!";
+                                        console.log(data);
+                                    }
+                                );
+                            };
+                        });
+                    })(BX);
+                </script>
+                <span style="font-size: 13px;">
+				<a id="ajax-report" href="#" onclick="">Пожаловаться!</a>
+				<span id="ajax-report-text"></span>
+			</span>
+            <? else: ?>
+                <? //<Работа в режиме GET> ?>
+                <span style="font-size: 13px;">
+				<a href="<?= $APPLICATION->GetCurPage() ?>?TYPE=REPORT_GET&ID=<?= $arResult['ID'] ?>">Пожаловаться!</a>
+				<span id="ajax-report-text"></span>
+			</span>
+            <? endif; ?>
+            <? // </ex2-104> ?>
+        </h3>
+    <? endif; ?>
 	<div class="news-detail">
 	<?if($arParams["DISPLAY_PREVIEW_TEXT"]!="N" && $arResult["FIELDS"]["PREVIEW_TEXT"]):?>
 		<p><?=$arResult["FIELDS"]["PREVIEW_TEXT"];unset($arResult["FIELDS"]["PREVIEW_TEXT"]);?></p>

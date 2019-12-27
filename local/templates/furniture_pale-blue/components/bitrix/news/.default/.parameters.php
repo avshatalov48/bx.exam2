@@ -17,15 +17,23 @@ $arTemplateParameters = array(
 		"TYPE" => "CHECKBOX",
 		"DEFAULT" => "Y",
 	),
+    // ex2-34
     "SPECIALDATE" => Array(
         "NAME" => GetMessage("SPECIALDATE"),
         "TYPE" => "CHECKBOX",
         "DEFAULT" => "Y",
     ),
+    // ex2-108
     "CANONICAL" => Array(
         "NAME" => GetMessage("CANONICAL"),
         "TYPE" => "STRING",
         "DEFAULT" => "",
+    ),
+    // ex2-104
+    "REPORT_AJAX" => Array(
+        "NAME" => GetMessage("REPORT_AJAX"),
+        "TYPE" => "CHECKBOX",
+        "DEFAULT" => "Y",
     ),
 	"USE_SHARE" => Array(
 		"NAME" => GetMessage("T_IBLOCK_DESC_NEWS_USE_SHARE"),
