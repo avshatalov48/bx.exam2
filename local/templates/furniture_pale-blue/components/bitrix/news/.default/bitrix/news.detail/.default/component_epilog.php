@@ -8,12 +8,12 @@ use Bitrix\Main\Loader;
 global $APPLICATION;
 
 //<ex2-108>
-/*
-В component_epilog.php происходит проверка на наличие в массиве $arResult ключа CANONICAL и если условие выполняется, мы устанавливаем заданное свойство страницы
-*/
+/**
+ * В component_epilog.php происходит проверка на наличие в массиве $arResult ключа CANONICAL
+ * и если условие выполняется, мы устанавливаем заданное свойство страницы
+ */
 
-// У автора в тексте - if($arParams['CANONICAL'] == 'Y'){ - так работать не будет
-if ($arParams['CANONICAL']) {
+if (!empty($arParams['CANONICAL'])) {
     $APPLICATION->SetPageProperty("canonical", $arResult['CANONICAL']['NAME']);
 }
 //</ex2-108>
@@ -21,54 +21,50 @@ if ($arParams['CANONICAL']) {
 
 //<ex2-104>
 if ($_GET['TYPE'] == 'REPORT_RESULT') {
+    echo '<script>' . PHP_EOL;
+    echo 'var textElem = document.getElementById("ajax-report-text");' . PHP_EOL;
     if ($_GET['ID']) {
-        echo '<script>
-		var textElem = document.getElementById("ajax-report-text");
-		textElem.innerText = "Ваше мнение учтено, №' . $_GET['ID'] . '";
-		window.history.pushState(null, null, "' . $APPLICATION->GetCurPage() . '");
-	</script>';
+        echo 'textElem.innerText = "Ваше мнение учтено, №' . $_GET['ID'] . '";' . PHP_EOL;
     } else {
-        echo '<script>
-		var textElem = document.getElementById("ajax-report-text");
-		textElem.innerText = "Ошибка";
-		window.history.pushState(null, null, "' . $APPLICATION->GetCurPage() . '");
-	</script>';
+        echo 'textElem.innerText = "Ошибка";' . PHP_EOL;
     }
+    echo '</script>';
 } else {
-    if (isset($_GET['ID'])) {
-        $jsonObject = [];
-        if (Loader::includeModule('iblock')) {
-            $arUser = '';
-            if ($USER->IsAuthorized()) {
-                $arUser = $USER->GetID() . " (" . $USER->GetLogin() . ") " . $USER->GetFullName();
-            } else {
-                $arUser = "Не авторизован";
+    if (isset($_GET['ID']) && Loader::includeModule('iblock')) {
+        $arAnswer = [];
+
+        $sUser = '';
+        if ($USER->IsAuthorized()) {
+            // ID, Логин, ФИО пользователя,
+            $sUser = $USER->GetID() . " (" . $USER->GetLogin() . ") " . $USER->GetFullName();
+        } else {
+            $sUser = "Не авторизован";
+        }
+
+        $arFields = [
+            // ИБ "Жалобы на новости"
+            'IBLOCK_ID'       => COMPLAIN_NEWS_IBLOCK_ID,
+            'NAME'            => 'Новость ' . $_GET['ID'],
+            'ACTIVE_FROM'     => ConvertTimeStamp(time(), "FULL"),
+            'PROPERTY_VALUES' => [
+                'USER_CODE' => $sUser,
+                'NEWS_CODE' => $_GET['ID'],
+            ],
+        ];
+
+        $oCIBlockElement = new \CIBlockElement();
+        if ($iElementId = $oCIBlockElement->Add($arFields)) {
+            $arAnswer['ID'] = $iElementId;
+
+            if ($_GET['TYPE'] == 'REPORT_AJAX') {
+                $APPLICATION->RestartBuffer();
+                echo json_encode($arAnswer);
+                exit;
+            } elseif ($_GET['TYPE'] == 'REPORT_GET') {
+                LocalRedirect($APPLICATION->GetCurPage() . "?TYPE=REPORT_RESULT&ID=" . $arAnswer['ID']);
             }
-            $arFields = [
-                // ИБ "Жалобы на новости"
-                'IBLOCK_ID'       => COMPLAIN_NEWS_IBLOCK_ID,
-                'NAME'            => 'Новость ' . $_GET['ID'],
-                'ACTIVE_FROM'     => ConvertTimeStamp(time(), "FULL"),
-                'PROPERTY_VALUES' => [
-                    'USER_CODE' => $arUser,
-                    'NEWS_CODE' => $_GET['ID'],
-                ],
-            ];
-            $element = new \CIBlockElement(false);
-            if ($elId = $element->Add($arFields)) {
-                $jsonObject['ID'] = $elId;
-                if ($_GET['TYPE'] == 'REPORT_AJAX') {
-                    $APPLICATION->RestartBuffer();
-                    echo json_encode($jsonObject);
-                    exit;
-                } else {
-                    if ($_GET['TYPE'] == 'REPORT_GET') {
-                        LocalRedirect($APPLICATION->GetCurPage() . "?TYPE=REPORT_RESULT&ID=" . $jsonObject['ID']);
-                    }
-                }
-            } else {
-                LocalRedirect($APPLICATION->GetCurPage() . "?TYPE=REPORT_RESULT");
-            }
+        } else {
+            LocalRedirect($APPLICATION->GetCurPage() . "?TYPE=REPORT_RESULT");
         }
     }
 }
