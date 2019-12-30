@@ -3,6 +3,10 @@
 } ?>
 
 <p>
+    <?= GetMessage("EX2_107_TIME_STAMP") ?><? echo time(); ?>
+</p>
+
+<p>
     <b><?= GetMessage("EX2_71_CATALOG_TITLE") ?></b>
 </p>
 

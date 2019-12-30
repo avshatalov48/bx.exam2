@@ -5,17 +5,27 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 
 use Bitrix\Main\Loader;
 
+global $USER;
+
+// [ex2-107]
+global $CACHE_MANAGER;
+
 if (!isset($arParams["CACHE_TIME"])) {
     $arParams["CACHE_TIME"] = 36000000;
 }
 
-if (!Loader::includeModule("iblock")) {
-    ShowError(GetMessage("EX2_71_IB_CHECK"));
-    return;
-}
-
 // Условия кеширования результата работы компонента - зависит от группы текущего пользователя
-if ($this->startResultCache(false, [$USER->GetGroups()])) {
+if ($this->startResultCache(false, ($arParams["CACHE_GROUPS"] === "N" ? false : $USER->GetGroups()))) {
+    if (!Loader::includeModule("iblock")) {
+        $this->abortResultCache();
+        ShowError(GetMessage("EX2_71_IB_CHECK"));
+        return;
+    }
+
+    // [ex2-107]
+    // Помечаем кэш тегом
+    $CACHE_MANAGER->RegisterTag("iblock_id_" . SERVICES_IBLOCK_ID);
+
     // Получаем классификатор
     $arResult["CLASS"] = [];
 
