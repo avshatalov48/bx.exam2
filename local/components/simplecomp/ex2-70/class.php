@@ -11,6 +11,8 @@ use \Bitrix\Main\Loader;
 class Simplecomp extends CBitrixComponent
 {
     /**
+     * Подготавливаем параметры
+     *
      * @param $arParams
      * @return array
      */
@@ -88,8 +90,6 @@ class Simplecomp extends CBitrixComponent
         while ($arRes = $res->Fetch()) {
             // Массив всех цен товаров
             $arAllPrice[] = $arRes["PROPERTY_PRICE_VALUE"];
-            // Все ID товаров
-            $arAllId[] = $arRes["ID"];
             foreach ($arProductSectionsTotal as &$arSection) {
                 if ($arRes["IBLOCK_SECTION_ID"] == $arSection["ID"]) {
                     // <ex2-58>
@@ -131,9 +131,6 @@ class Simplecomp extends CBitrixComponent
         // Максимальная цена
         $this->arResult["MAX_PRICE"] = max($arAllPrice);
         // </ex2-82>
-
-        // Максимальный ID элемента товаров
-        $this->arResult["MAX_ELEMENT_ID"] = max($arAllId);
 
         // Количество товаров
         $this->arResult["COUNT"] = $iCount;

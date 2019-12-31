@@ -4,15 +4,6 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 }
 ?>
 
-<?
-// ex2-58
-// Костылик
-// ID, у элемента в DOM-дереве должен быть уникальным, но они дублируются в разных разделах,
-// поэтому у некоторых редактирование не работает. Получаем максимальный ID, далее формируем уникальные по порядку,
-// чтобы не пересекались.
-$iElementId = $arResult["MAX_ELEMENT_ID"];
-?>
-
 <b>
     <?= GetMessage("EX2_70_CATALOG") ?>
 </b>
@@ -51,15 +42,19 @@ $iElementId = $arResult["MAX_ELEMENT_ID"];
                     <? foreach ($arItem["ITEMS"] as $iKey => $arSection): ?>
                         <? foreach ($arSection["ITEMS"] as $arElement): ?>
                             <? // ex2-58
-                            $iElementId++;
-                            $this->AddEditAction($iElementId, $arElement["EDIT_LINK"],
+                            // ID, у элемента в DOM-дереве должен быть уникальным, но они дублируются в разных разделах,
+                            // поэтому у некоторых редактирование не работает. Формируем уникальный,
+                            // чтобы не пересекались.
+                            $sElementId = $arItem["ID"] . $arSection["ID"] . $arElement["ID"];
+
+                            $this->AddEditAction($sElementId, $arElement["EDIT_LINK"],
                                 CIBlock::GetArrayByID($arElement["IBLOCK_ID"], "ELEMENT_EDIT"));
-                            $this->AddDeleteAction($iElementId, $arElement["EDIT_LINK"],
+                            $this->AddDeleteAction($sElementId, $arElement["EDIT_LINK"],
                                 CIBlock::GetArrayByID($arElement["IBLOCK_ID"], "ELEMENT_DELETE"),
                                 array("CONFIRM" => GetMessage("EX2_58_ELEMENT_DELETE_CONFIRM")));
                             ?>
 
-                            <div id="<?= $this->GetEditAreaId($iElementId); ?>"><!-- End ex2-58 -->
+                            <div id="<?= $this->GetEditAreaId($sElementId); ?>"><!-- End ex2-58 -->
                                 <li>
                                     <?= $arElement["NAME"] ?> -
                                     <?= $arElement["PROPERTY_PRICE_VALUE"] ?> -
