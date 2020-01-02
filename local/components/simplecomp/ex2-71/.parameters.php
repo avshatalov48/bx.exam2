@@ -25,6 +25,13 @@ $arComponentParameters = [
             "NAME"   => GetMessage("EX2_71_CODE_PROPERTY"),
             "TYPE"   => "STRING",
         ],
+        // ex2-60
+        "ELEMENTS_PER_PAGE" => [
+            "PARENT"  => "BASE",
+            "NAME"    => GetMessage("EX2_60_ELEMENTS_PER_PAGE"),
+            "TYPE"    => "STRING",
+            "DEFAULT" => "2",
+        ],
         // Время кеширования (сек.)
         "CACHE_TIME"    => ["DEFAULT" => 3600],
         // [Y|N] При отмеченной опции будут учитываться права доступа при кешировании

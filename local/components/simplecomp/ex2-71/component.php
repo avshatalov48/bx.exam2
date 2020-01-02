@@ -14,8 +14,16 @@ if (!isset($arParams["CACHE_TIME"])) {
     $arParams["CACHE_TIME"] = 36000000;
 }
 
+// ex2-60
+// Получаем параметры постраничной навигации
+$arNavigation = CDBResult::GetNavParams($arNavParams);
+
 // Условия кеширования результата работы компонента - зависит от группы текущего пользователя
-if ($this->startResultCache(false, ($arParams["CACHE_GROUPS"] === "N" ? false : $USER->GetGroups()))) {
+// Код кэша из news.list
+if ($this->startResultCache(false, [
+    ($arParams["CACHE_GROUPS"] === "N" ? false : $USER->GetGroups()),
+    $arNavigation,
+])) {
     if (!Loader::includeModule("iblock")) {
         $this->abortResultCache();
         ShowError(GetMessage("EX2_71_IB_CHECK"));
@@ -41,14 +49,20 @@ if ($this->startResultCache(false, ($arParams["CACHE_GROUPS"] === "N" ? false : 
         "ACTIVE"            => "Y",
     ];
 
-
     $resElements = \CIBlockElement::GetList(
         false,
         $arFilterClass,
         false,
-        false,
+        // ex2-60
+        // "nPageSize" - количество элементов на странице при постраничной навигации
+        // "bShowAll" - разрешить вывести все элементы при постраничной навигации
+        ["nPageSize" => $arParams['ELEMENTS_PER_PAGE'], "bShowAll" => false],
         $arSelectClass
     );
+
+    // ex2-60
+    // Задаём "NAV_TITLE"
+    $arResult["NAV_STRING"] = $resElements->GetPageNavString(GetMessage("EX2_60_PAGES"));
 
     while ($arElement = $resElements->GetNext()) {
         $arResult["CLASS"][$arElement["ID"]] = $arElement;
@@ -94,9 +108,17 @@ if ($this->startResultCache(false, ($arParams["CACHE_GROUPS"] === "N" ? false : 
         $arEl["PROPS"] = $ob->GetProperties();
 
         $arResult["ELEMENTS"][$arEl["ID"]] = $arEl;
+    }
 
-        foreach ($arEl["PROPS"]["FIRMS"]["VALUE"] as $iVal) {
-            $arResult["CLASS"][$iVal]["ELEMENTS_ID"][] = $arEl["ID"];
+    // Группируем элементы по классификаторам
+    foreach ($arResult["CLASS"] as $iClass => $arClass) {
+        foreach ($arResult["ELEMENTS"] as $iEl => $arEl) {
+            foreach ($arEl["PROPS"]["FIRMS"]["VALUE"] as $iVal) {
+                if ($iVal == $iClass) {
+                    $arResult["CLASS"][$iVal]["ELEMENTS_ID"][] = $arEl["ID"];
+                    break;
+                }
+            }
         }
     }
 

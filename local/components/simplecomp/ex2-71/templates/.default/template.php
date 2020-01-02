@@ -27,3 +27,7 @@
         </ul>
     <? endforeach; ?>
 </ul>
+
+<br>---
+<p><b><?= GetMessage("EX2_60_NAVIGATION") ?></b></p>
+<? echo $arResult["NAV_STRING"] ?>
