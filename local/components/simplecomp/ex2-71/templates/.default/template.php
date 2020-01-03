@@ -3,6 +3,13 @@
 } ?>
 
 <p>
+    <? $sCurPage = $APPLICATION->GetCurPage() . "?F=Y"; ?>
+    <?= GetMessage("EX2_49_FILTER") ?><a href="<?= $sCurPage ?>"><?= $sCurPage ?></a>
+    <br>
+    ---
+</p>
+
+<p>
     <?= GetMessage("EX2_107_TIME_STAMP") ?><? echo time(); ?>
 </p>
 

@@ -14,6 +14,13 @@ if (!isset($arParams["CACHE_TIME"])) {
     $arParams["CACHE_TIME"] = 36000000;
 }
 
+// ex2-49
+// Фильтр должен применяться, если в адресной строке присутствует параметр «F», с любым значением.
+$bFilter = false;
+if (isset($_REQUEST["F"])) {
+    $bFilter = true;
+}
+
 // ex2-60
 // Получаем параметры постраничной навигации
 $arNavigation = CDBResult::GetNavParams($arNavParams);
@@ -22,6 +29,7 @@ $arNavigation = CDBResult::GetNavParams($arNavParams);
 // Код кэша из news.list
 if ($this->startResultCache(false, [
     ($arParams["CACHE_GROUPS"] === "N" ? false : $USER->GetGroups()),
+    $bFilter,
     $arNavigation,
 ])) {
     if (!Loader::includeModule("iblock")) {
@@ -86,6 +94,27 @@ if ($this->startResultCache(false, [
         "PROPERTY_" . $arParams["CODE_PROPERTY"] => $arClassIDs,
         "ACTIVE"                                 => "Y",
     ];
+
+    // ex2-49
+    if ($bFilter) {
+        $arFilterElems[] = [
+            // Логика фильтра «или», должны отбираться элементы, удовлетворяющие или условию 1 или условию 2
+            "LOGIC" => "OR",
+            [
+                // 1: с ценой меньше или равной 1700 и материалом равным «Дерево, ткань»
+                "<=PROPERTY_PRICE" => "1700",
+                "PROPERTY_MATERIAL" => "Дерево, ткань"
+            ],
+            [
+                // 2: с ценой меньше 1500 и материалом равным «Металл, пластик»
+                "<PROPERTY_PRICE" => "1500",
+                "PROPERTY_MATERIAL" => "Металл, пластик"
+            ],
+        ];
+
+        // Компонент не должен кешировать результат работы, если используется дополнительный фильтр.
+        $this->abortResultCache();
+    }
 
     $arSortElems = [
         "SORT" => "ASC",
