@@ -137,17 +137,21 @@ if ($this->startResultCache(false, [
         $arSelectElems
     );
 
+    // ex2-81
+    if ($arParams["TEMPLATE_DETAIL_URL"]) {
+        // Устанавливает шаблоны путей для элементов, разделов
+        // и списка элементов вместо тех которые указаны в настройках информационного блока.
+        $resElements->SetUrlTemplates($arParams["TEMPLATE_DETAIL_URL"]);
+    }
+
     while ($ob = $resElements->GetNextElement()) {
         $arEl = $ob->GetFields();
+        // ex2-81
+        // Преобразуем ссылку согласно примера на картинке
+        $arEl["DETAIL_PAGE_URL"] = "/" . $arEl["DETAIL_PAGE_URL"] . ".php";
         // Т.к. св-во "FIRMS" множественное, а в ИБ хранятся св-ва в одной таблице (не в отдельной),
         // чтобы не было дублей - получаем св-ва через отдельный метод
         $arEl["PROPS"] = $ob->GetProperties();
-
-        // ex2-81
-        // Производим замены в шаблоне URL по массиву значений
-        $arEl["ELEMENT_CODE"] = $arEl["CODE"] . ".php";
-        $arEl["DETAIL_PAGE_URL_81"] = "/" . CIBlock::ReplaceDetailUrl($arParams["TEMPLATE_DETAIL_URL"], $arEl);
-
         $arResult["ELEMENTS"][$arEl["ID"]] = $arEl;
     }
 
