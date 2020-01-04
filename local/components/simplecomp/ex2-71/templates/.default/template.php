@@ -29,6 +29,7 @@
                         - <?= $arEl["PROPS"]["PRICE"]["VALUE"] ?>
                         - <?= $arEl["PROPS"]["MATERIAL"]["VALUE"] ?>
                     </a>
+                    &nbsp;(<?= $arEl["DETAIL_PAGE_URL_81"] ?>)
                 </li>
             <? endforeach; ?>
         </ul>

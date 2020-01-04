@@ -1,6 +1,6 @@
 # Готовый экзамен Битрикс «№2 Основные технологии, расширение типовых возможностей системы» (Версия 4.0.4, 27.02.2019)
 
-[![Donate](https://img.shields.io/badge/Donate-Yandex.Money-green.svg)](https://money.yandex.ru/to/410013131142938)
+[![Donate](https://img.shields.io/badge/Donate-Yandex.Money-green.svg)](https://money.yandex.ru/to/410013131142938){:target="_blank"}
 
 * [Задания и решения](./wiki/tasks/tasks.md)
 
@@ -8,13 +8,13 @@
 
 ## Резервные копии
 
-* [Резервные копии](https://yadi.sk/d/s93lr3K1t4esPQ)
+* [Резервные копии](https://yadi.sk/d/s93lr3K1t4esPQ){:target="_blank"}
 
-* [Бэкапы БД](https://github.com/avshatalov48/bx.exam2/tree/master/bitrix/backup)
+* [Бэкапы БД](https://github.com/avshatalov48/bx.exam2/tree/master/bitrix/backup){:target="_blank"}
 
-* [restore.php](http://www.1c-bitrix.ru/download/scripts/restore.php)
+* [restore.php](http://www.1c-bitrix.ru/download/scripts/restore.php){:target="_blank"}
 
-* [Регистрация пробных версий продуктов и решений «1С-Битрикс»](https://www.1c-bitrix.ru/bsm_register.php)
+* [Регистрация пробных версий продуктов и решений «1С-Битрикс»](https://www.1c-bitrix.ru/bsm_register.php){:target="_blank"}
 
 ### Данные
 

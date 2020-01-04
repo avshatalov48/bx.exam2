@@ -86,6 +86,9 @@ if ($this->startResultCache(false, [
         "NAME",
         // URL ссылки на детальный просмотр
         "DETAIL_PAGE_URL",
+        // ex2-81
+        "IBLOCK_SECTION_ID",
+        "CODE",        
     ];
 
     $arFilterElems = [
@@ -116,8 +119,12 @@ if ($this->startResultCache(false, [
         $this->abortResultCache();
     }
 
+    // ex2-81
+    // Установить сортировку отбираемых элементов из информационного блока каталога товаров:
+    // сначала по наименованию, затем по полю сортировки.
     $arSortElems = [
-        "SORT" => "ASC",
+        'NAME' => 'ASC',
+        'SORT' => 'ASC'
     ];
 
     $arResult["ELEMENTS"] = [];
@@ -135,6 +142,11 @@ if ($this->startResultCache(false, [
         // Т.к. св-во "FIRMS" множественное, а в ИБ хранятся св-ва в одной таблице (не в отдельной),
         // чтобы не было дублей - получаем св-ва через отдельный метод
         $arEl["PROPS"] = $ob->GetProperties();
+
+        // ex2-81
+        // Производим замены в шаблоне URL по массиву значений
+        $arEl["ELEMENT_CODE"] = $arEl["CODE"] . ".php";
+        $arEl["DETAIL_PAGE_URL_81"] = "/" . CIBlock::ReplaceDetailUrl($arParams["TEMPLATE_DETAIL_URL"], $arEl);
 
         $arResult["ELEMENTS"][$arEl["ID"]] = $arEl;
     }
