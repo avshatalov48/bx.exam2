@@ -10,7 +10,15 @@
 
 * [VMware Workstation Player (бесплатен для некоммерческого, личного и домашнего использования)](https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html)
 
-* [Готовый экзамен №2 (образ VMware, бэкап Битрикс, папка local)](https://github.com/donitz1609/bitrix.exam2)
+## GitHub
+
+* [Готовый экзамен №2 (образ VMware, бэкап Битрикс, папка local) (donitz1609)](https://github.com/donitz1609/bitrix.exam2)
+
+* [bitrix_trening_ex2 (AlexanderBS468)](https://github.com/AlexanderBS468/bitrix_trening_ex2/)
+
+* [start: Exam 2 (RomanIShow)](https://github.com/RomanIShow/start/)
+
+* [ex2all (katrinediakon)](https://github.com/katrinediakon/ex2all)
 
 ## Опыт сдачи экзамена
 
