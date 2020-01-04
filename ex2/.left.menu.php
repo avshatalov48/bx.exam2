@@ -14,15 +14,15 @@ $aMenuLinks = Array(
 		Array(), 
 		"" 
 	),
-    Array(
-        "Простой компонент: [ex2-70] (component.php)",
-        "/ex2/ex2-70_comp/",
-        Array(),
-        Array(),
-        ""
-    ),
 	Array(
-		"Простой компонент: [ex2-71], [ex2-107], [ex2-60], [ex2-49], [ex2-81]",
+		"Простой компонент: [ex2-70] (component.php)", 
+		"/ex2/ex2-70_comp/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Простой компонент: [ex2-71], [ex2-107], [ex2-60], [ex2-49], [ex2-81]", 
 		"/ex2/ex2-71/", 
 		Array(), 
 		Array(), 
@@ -57,8 +57,15 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Простой компонент: [ex2-97]",
+		"Простой компонент: [ex2-97]", 
 		"/ex2/ex2-97/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Комплексный компонент", 
+		"/ex2/complexcomponent/", 
 		Array(), 
 		Array(), 
 		"" 
