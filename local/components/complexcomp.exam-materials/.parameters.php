@@ -71,8 +71,9 @@ $arComponentParameters = array(
 			"ELEMENT_ID" => Array("NAME" => GetMessage("ELEMENT_ID_DESC")),
 				
 			//Добавили переменные
-			//"PARAM1" => Array("NAME" => GetMessage("PARAM1")),
-			//"PARAM2" => Array("NAME" => GetMessage("PARAM2")),
+			// ТЗ: Добавить 2 переменные для построения адреса страницы: PARAM1, PARAM2
+			"PARAM1" => Array("NAME" => GetMessage("PARAM1")),
+			"PARAM2" => Array("NAME" => GetMessage("PARAM2")),
 			//"PARAM3" => Array("NAME" => GetMessage("PARAM3")),
 			//"PARAM4" => Array("NAME" => GetMessage("PARAM4")),
 				
@@ -96,11 +97,12 @@ $arComponentParameters = array(
 			),
 				
 			//добавили новую страницу
-			//"exampage" => array(
-					//"NAME" => GetMessage("EXAM_PAGE"),
-					//DEFAULT
-					//VARIABLES
-			//),
+			// ТЗ: Шаблон адреса по умолчанию для страницы exampage.php при ЧПУ режиме
+			"exampage" => array(
+					"NAME" => GetMessage("EXAM_PAGE"),
+					"DEFAULT" => 'exam/new/#PARAM1#/?PARAM2=#PARAM2#',
+					"VARIABLES" => array("PARAM1" , "PARAM2"),
+			),
 				
 				
 		),

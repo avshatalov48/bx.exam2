@@ -17,28 +17,44 @@ if($arParams["USE_FILTER"]=="Y")
 else
 	$arParams["FILTER_NAME"] = "";
 
+// Для задания путей по умолчанию для работы в ЧПУ режиме. Каждый элемент массива является шаблоном пути
 $arDefaultUrlTemplates404 = array(
 	"sections_top" => "",
 	"section" => "#SECTION_ID#/",
 	"detail" => "#SECTION_ID#/#ELEMENT_ID#/",
+	"exampage" => "#PARAM1#/?PARAM2=#PARAM2#",
 );
 
+// Для задания псевдонимов по умолчанию переменных в режиме ЧПУ. Как правило, этот массив пуст (используются реальные имена переменных).
 $arDefaultVariableAliases404 = array();
 
+// Для задания псевдонимов по умолчанию переменных в режиме не ЧПУ. Как правило, этот массив пуст, то есть используются реальные имена переменных.
 $arDefaultVariableAliases = array();
 
+// Для задания списка переменных, которые компонент может принимать в HTTP запросе и которые могут иметь псевдонимы.
+// Каждый элемент массива является именем переменной.
 $arComponentVariables = array(
 	"SECTION_ID",
 	"SECTION_CODE",
 	"ELEMENT_ID",
 	"ELEMENT_CODE",
+	"PARAM1",
+	"PARAM2",
 );
 
 if($arParams["SEF_MODE"] == "Y")
 {
 	$arVariables = array();
 
+	// Метод служит для поддержки ЧПУ режима в комплексных компонентах.
+    // Метод принимает на входе шаблоны путей по умолчанию и шаблоны путей,
+    // переданные во входных параметрах компонента и заменяет те шаблоны путей по умолчанию,
+    // которые были переопределены во входных параметрах компонента. Статический метод.
 	$arUrlTemplates = CComponentEngine::MakeComponentUrlTemplates($arDefaultUrlTemplates404, $arParams["SEF_URL_TEMPLATES"]);
+
+    // Метод принимает псевдонимы переменных по умолчанию и псевдонимы переменных,
+    // переданные во входных параметрах компонента и заменяет те псевдонимы переменных по умолчанию,
+    // которые были переопределены во входных параметрах компонента. Статический метод.
 	$arVariableAliases = CComponentEngine::MakeComponentVariableAliases($arDefaultVariableAliases404, $arParams["VARIABLE_ALIASES"]);
 
 	$engine = new CComponentEngine($this);
@@ -113,6 +129,9 @@ else
 		$componentPage = "section";
 	elseif(isset($arVariables["SECTION_CODE"]) && strlen($arVariables["SECTION_CODE"]) > 0)
 		$componentPage = "section";
+	elseif((isset($arVariables["PARAM1"]) && strlen($arVariables["PARAM1"]) > 0)
+		&& (isset($arVariables["PARAM2"]) && strlen($arVariables["PARAM2"]) > 0))
+		$componentPage = "exampage";
 	else
 		$componentPage = "sections_top";
 
@@ -121,6 +140,7 @@ else
 		"URL_TEMPLATES" => Array(
 			"section" => htmlspecialcharsbx($APPLICATION->GetCurPage())."?".$arVariableAliases["SECTION_ID"]."=#SECTION_ID#",
 			"detail" => htmlspecialcharsbx($APPLICATION->GetCurPage())."?".$arVariableAliases["SECTION_ID"]."=#SECTION_ID#"."&".$arVariableAliases["ELEMENT_ID"]."=#ELEMENT_ID#",
+			"exampage" => htmlspecialcharsbx($APPLICATION->GetCurPage())."?".$arVariableAliases["PARAM1"]."=#PARAM1#" . '&' . $arVariableAliases["PARAM2"]."=#PARAM2#",
 		),
 		"VARIABLES" => $arVariables,
 		"ALIASES" => $arVariableAliases
