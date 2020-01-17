@@ -2,6 +2,8 @@
 
 * [Экзамены и материалы для подготовки](https://academy.1c-bitrix.ru/certification/exams.php)
 
+* [Первоначальная настройка экзаменационного сервера](./ubuntu.md)
+
 * [Форум. Экзамен №2. Вопросы и ответы по заданиям](https://dev.1c-bitrix.ru/community/forums/forum6/topic91539/)
 
 * [Форум. Экзамен №2. Вопросы и ответы по заданиям. Часть 1, архив.](https://dev.1c-bitrix.ru/support/forum/forum6/topic83477/)
