@@ -162,9 +162,9 @@ class Simplecomp extends CBitrixComponent
                 0,
                 array("SECTION_BUTTONS" => false, "SESSID" => false)
             );
-            */
             $arRes["EDIT_LINK"] = $arButtons["edit"]["edit_element"]["ACTION_URL"];
             $arRes["DELETE_LINK"] = $arButtons["edit"]["delete_element"]["ACTION_URL"];
+            */
             // </ex2-58>
 
             $this->arResult["ITEMS"][$i] = $arRes;
