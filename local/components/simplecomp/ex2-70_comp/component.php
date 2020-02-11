@@ -102,14 +102,14 @@ if ($this->startResultCache(false, ($arParams["CACHE_GROUPS"] === "N" ? false : 
     // Распределение продукции по новостям
     while ($arProduct = $resProducts->Fetch()) {
         $arResult['PRODUCT_COUNT']++;
-        foreach ($arSectionList[$arProduct['IBLOCK_SECTION_ID']]['UF_NEWS_LINK'] as $iNewsID) {
+        foreach ($arSectionList[$arProduct['IBLOCK_SECTION_ID']][$arParams['USER_PROPERTY']] as $iNewsID) {
             $arNewsList[$iNewsID]['PRODUCTS'][] = $arProduct;
         }
     }
 
     // Распределение разделов по новостям
     foreach ($arSectionList as $arSection) {
-        foreach ($arSection['UF_NEWS_LINK'] as $iNewsID) {
+        foreach ($arSection[$arParams['USER_PROPERTY']] as $iNewsID) {
             $arNewsList[$iNewsID]['SECTIONS'][] = $arSection['NAME'];
         }
     }
