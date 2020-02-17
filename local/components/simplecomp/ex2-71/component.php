@@ -53,7 +53,7 @@ if ($this->startResultCache(false, [
 
     $arFilterClass = [
         "IBLOCK_ID"         => $arParams["ID_IB_CLASS"],
-        "CHECK_PERMISSIONS" => $arParams["CACHE_GROUPS"],
+        "CHECK_PERMISSIONS" => "Y",
         "ACTIVE"            => "Y",
     ];
 
@@ -81,6 +81,7 @@ if ($this->startResultCache(false, [
 
     // Получаем элементы из каталога
     $arSelectElems = [
+        // Обязательно должно быть использованы поля IBLOCK_ID и ID для корректного получения свойств
         "ID",
         "IBLOCK_ID",
         "NAME",
@@ -93,7 +94,7 @@ if ($this->startResultCache(false, [
 
     $arFilterElems = [
         "IBLOCK_ID"                              => $arParams["ID_IB_CATALOG"],
-        "CHECK_PERMISSIONS"                      => $arParams["CACHE_GROUPS"],
+        "CHECK_PERMISSIONS"                      => "Y",
         "PROPERTY_" . $arParams["CODE_PROPERTY"] => $arClassIDs,
         "ACTIVE"                                 => "Y",
     ];
