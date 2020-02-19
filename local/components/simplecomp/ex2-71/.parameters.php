@@ -33,12 +33,13 @@ $arComponentParameters = [
             "DEFAULT" => "2",
         ],
         // ex2-81
-        "TEMPLATE_DETAIL_URL" => [
-            "PARENT"  => "BASE",
-            "NAME"    => GetMessage("EX2_81_TEMPLATE_DETAIL_URL"),
-            "TYPE"    => "STRING",
-            "DEFAULT" => "catalog_exam/#SECTION_ID#/#ELEMENT_CODE#",
-        ],
+        "TEMPLATE_DETAIL_URL" => CIBlockParameters::GetPathTemplateParam(
+            "DETAIL",
+            "TEMPLATE_DETAIL_URL",
+            GetMessage("EX2_81_TEMPLATE_DETAIL_URL"),
+            "catalog_exam/#SECTION_ID#/#ELEMENT_CODE#",
+            "URL_TEMPLATES"
+        ),
         // Время кеширования (сек.)
         "CACHE_TIME"    => ["DEFAULT" => 3600],
         // [Y|N] При отмеченной опции будут учитываться права доступа при кешировании
