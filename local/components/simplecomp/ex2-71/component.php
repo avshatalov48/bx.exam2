@@ -53,7 +53,7 @@ if ($this->startResultCache(false, [
 
     $arFilterClass = [
         "IBLOCK_ID"         => $arParams["ID_IB_CLASS"],
-        "CHECK_PERMISSIONS" => "Y",
+        "CHECK_PERMISSIONS" => $arParams["CACHE_GROUPS"],
         "ACTIVE"            => "Y",
     ];
 
@@ -94,7 +94,7 @@ if ($this->startResultCache(false, [
 
     $arFilterElems = [
         "IBLOCK_ID"                              => $arParams["ID_IB_CATALOG"],
-        "CHECK_PERMISSIONS"                      => "Y",
+        "CHECK_PERMISSIONS"                      => $arParams["CACHE_GROUPS"],
         "PROPERTY_" . $arParams["CODE_PROPERTY"] => $arClassIDs,
         "ACTIVE"                                 => "Y",
     ];
