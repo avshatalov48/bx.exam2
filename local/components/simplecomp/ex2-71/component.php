@@ -147,9 +147,6 @@ if ($this->startResultCache(false, [
 
     while ($ob = $resElements->GetNextElement()) {
         $arEl = $ob->GetFields();
-        // ex2-81
-        // Преобразуем ссылку согласно примера на картинке
-        $arEl["DETAIL_PAGE_URL"] = "/" . $arEl["DETAIL_PAGE_URL"] . ".php";
         // Т.к. св-во "FIRMS" множественное, а в ИБ хранятся св-ва в одной таблице (не в отдельной),
         // чтобы не было дублей - получаем св-ва через отдельный метод
         $arEl["PROPS"] = $ob->GetProperties();

@@ -37,7 +37,7 @@ $arComponentParameters = [
             "DETAIL",
             "TEMPLATE_DETAIL_URL",
             GetMessage("EX2_81_TEMPLATE_DETAIL_URL"),
-            "catalog_exam/#SECTION_ID#/#ELEMENT_CODE#",
+            "/catalog_exam/#SECTION_ID#/#ELEMENT_CODE#.php",
             "URL_TEMPLATES"
         ),
         // Время кеширования (сек.)
