@@ -35,8 +35,6 @@ class Simplecomp extends CBitrixComponent
      */
     public function setArResult()
     {
-        global $APPLICATION;
-
         // <Выборка разделов из ИБ "Продукция">
         $arFilter = [
             "IBLOCK_ID" => $this->arParams["IBLOCK_CATALOG_ID"],
@@ -97,7 +95,7 @@ class Simplecomp extends CBitrixComponent
                         $arRes["IBLOCK_ID"],
                         $arRes["ID"],
                         0,
-                        array("SECTION_BUTTONS" => false, "SESSID" => false)
+                        ["SECTION_BUTTONS" => false, "SESSID" => false]
                     );
                     $arRes["EDIT_LINK"] = $arButtons["edit"]["edit_element"]["ACTION_URL"];
                     $arRes["DELETE_LINK"] = $arButtons["edit"]["delete_element"]["ACTION_URL"];
@@ -109,20 +107,6 @@ class Simplecomp extends CBitrixComponent
             }
             $iCount++;
         }
-
-        // <ex2-58>
-        // Возвращает "true", если кнопка "Показать включаемые области" на панели управления нажата, в противном случае - "false".
-        if ($APPLICATION->GetShowIncludeAreas()) {
-            // Метод возвращает массив, описывающий набор кнопок для управления элементами инфоблока
-            $arButtons = CIBlock::GetPanelButtons(
-                $this->arParams["IBLOCK_CATALOG_ID"],
-                0
-            );
-            // Добавляет массив новых кнопок к тем кнопкам компонента, которые отображаются в области компонента в режиме редактирования сайта.
-            $this->addIncludeAreaIcons(CIBlock::GetComponentMenu($APPLICATION->GetPublicShowMode(), $arButtons));
-        }
-        // </ex2-58>
-
         // </Выборка товаров из ИБ "Продукция" по выбранным разделам>
 
         // <ex2-82>
@@ -204,6 +188,9 @@ class Simplecomp extends CBitrixComponent
      */
     public function executeComponent()
     {
+        global $APPLICATION;
+        global $USER;
+
         if (!Loader::includeModule("iblock")) {
             ShowError(GetMessage("EX2_70_IB_CHECK"));
             return;
@@ -237,8 +224,26 @@ class Simplecomp extends CBitrixComponent
             $this->includeComponentTemplate();
         }
 
-        global $APPLICATION;
         $APPLICATION->SetTitle(GetMessage("EX2_70_ELEMENTS_COUNT") . $this->arResult["COUNT"]);
+
+        // <ex2-58>
+        if (
+            !empty($this->arParams["IBLOCK_CATALOG_ID"]) &&
+            $USER->IsAuthorized() &&
+            // Возвращает "true", если кнопка "Показать включаемые области" на панели управления нажата, в противном случае - "false".
+            $APPLICATION->GetShowIncludeAreas()
+        ) {
+            // Метод возвращает массив, описывающий набор кнопок для управления элементами инфоблока
+            $arButtons = CIBlock::GetPanelButtons(
+                $this->arParams["IBLOCK_CATALOG_ID"],
+                0,
+                0,
+                ["SECTION_BUTTONS" => false]
+            );
+            // Добавляет массив новых кнопок к тем кнопкам компонента, которые отображаются в области компонента в режиме редактирования сайта.
+            $this->addIncludeAreaIcons(CIBlock::GetComponentMenu($APPLICATION->GetPublicShowMode(), $arButtons));
+        }
+        // </ex2-58>
 
         // ex2-82
         // AddViewContent - позволяет указать место вывода контента, создаваемого ниже по коду с помощью метода ShowViewContent.
