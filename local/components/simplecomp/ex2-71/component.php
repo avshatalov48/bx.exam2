@@ -22,7 +22,18 @@ if (isset($_REQUEST["F"])) {
 }
 
 // ex2-60
-// Получаем параметры постраничной навигации
+// Получаем параметры навигации
+$arParams['ELEMENTS_PER_PAGE'] = (int)$arParams['ELEMENTS_PER_PAGE'];
+$arParams["PAGER_TITLE"] = trim($arParams["PAGER_TITLE"]);
+$arParams["PAGER_SHOW_ALL"] = $arParams["PAGER_SHOW_ALL"] == "Y";
+
+// "nPageSize" - количество элементов на странице при постраничной навигации
+// "bShowAll" - разрешить вывести все элементы при постраничной навигации
+$arNavParams = [
+    "nPageSize" => $arParams['ELEMENTS_PER_PAGE'],
+    "bShowAll"  => $arParams["PAGER_SHOW_ALL"],
+];
+
 $arNavigation = CDBResult::GetNavParams($arNavParams);
 
 // Условия кеширования результата работы компонента - зависит от группы текущего пользователя
@@ -62,15 +73,17 @@ if ($this->startResultCache(false, [
         $arFilterClass,
         false,
         // ex2-60
-        // "nPageSize" - количество элементов на странице при постраничной навигации
-        // "bShowAll" - разрешить вывести все элементы при постраничной навигации
-        ["nPageSize" => $arParams['ELEMENTS_PER_PAGE'], "bShowAll" => false],
+        $arNavParams,
         $arSelectClass
     );
 
     // ex2-60
-    // Задаём "NAV_TITLE"
-    $arResult["NAV_STRING"] = $resElements->GetPageNavString(GetMessage("EX2_60_PAGES"));
+    $arResult["NAV_STRING"] = $resElements->GetPageNavStringEx(
+        $navComponentObject,
+        $arParams["PAGER_TITLE"],
+        $arParams["PAGER_TEMPLATE"],
+        $arParams["PAGER_SHOW_ALWAYS"]
+    );
 
     while ($arElement = $resElements->GetNext()) {
         $arResult["CLASS"][$arElement["ID"]] = $arElement;

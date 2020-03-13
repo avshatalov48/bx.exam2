@@ -51,3 +51,12 @@ $arComponentParameters = [
         ],
     ],
 ];
+
+CIBlockParameters::AddPagerSettings(
+    $arComponentParameters,
+    GetMessage("EX2_60_PAGER_TITLE"), //$pager_title // Название категорий
+    true, //$bDescNumbering // Использовать обратную навигацию
+    true, //$bShowAllParam // Показывать ссылку "Все"
+    false, //$bBaseLink // Включить обработку ссылок
+    false //$bBaseLinkEnabled
+);
