@@ -51,7 +51,9 @@ if ($this->startResultCache(false, [
 
     // [ex2-107]
     // Помечаем кэш тегом
-    $CACHE_MANAGER->RegisterTag("iblock_id_" . SERVICES_IBLOCK_ID);
+    if (defined('BX_COMP_MANAGED_CACHE')) {
+        $CACHE_MANAGER->RegisterTag("iblock_id_" . SERVICES_IBLOCK_ID);
+    }
 
     // Получаем классификатор
     $arResult["CLASS"] = [];
