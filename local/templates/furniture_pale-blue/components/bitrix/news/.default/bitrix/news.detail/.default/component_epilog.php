@@ -21,6 +21,7 @@ if (!empty($arParams['CANONICAL'])) {
 
 //<ex2-104>
 if ($_GET['TYPE'] == 'REPORT_RESULT') {
+    // Формирование строки с результатом, вывод его в "ajax-report-text"
     echo '<script>' . PHP_EOL;
     echo 'var textElem = document.getElementById("ajax-report-text");' . PHP_EOL;
     if ($_GET['ID']) {
@@ -35,7 +36,7 @@ if ($_GET['TYPE'] == 'REPORT_RESULT') {
 
         $sUser = '';
         if ($USER->IsAuthorized()) {
-            // ID, Логин, ФИО пользователя,
+            // ID, Логин, ФИО пользователя
             $sUser = $USER->GetID() . " (" . $USER->GetLogin() . ") " . $USER->GetFullName();
         } else {
             $sUser = "Не авторизован";
