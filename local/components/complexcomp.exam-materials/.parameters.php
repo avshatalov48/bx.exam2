@@ -99,8 +99,11 @@ $arComponentParameters = array(
 			//добавили новую страницу
 			// ТЗ: Шаблон адреса по умолчанию для страницы exampage.php при ЧПУ режиме
 			"exampage" => array(
+					// название шаблона пути на текущем языке
 					"NAME" => GetMessage("EXAM_PAGE"),
+					// шаблон пути по-умолчанию
 					"DEFAULT" => 'exam/new/#PARAM1#/?PARAM2=#PARAM2#',
+					// массив внутренних названий переменных, которые могут использоваться в шаблоне
 					"VARIABLES" => array("PARAM1" , "PARAM2"),
 			),
 				

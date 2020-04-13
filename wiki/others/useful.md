@@ -14,6 +14,8 @@
 
 ## GitHub
 
+* [Экзамен Битрикс «№2 Основные технологии, расширение типовых возможностей системы» (bakanyaka)](https://github.com/bakanyaka/bitrix-exam2)
+
 * [Готовый экзамен №2 (образ VMware, бэкап Битрикс, папка local) (donitz1609)](https://github.com/donitz1609/bitrix.exam2)
 
 * [bitrix_trening_ex2 (AlexanderBS468)](https://github.com/AlexanderBS468/bitrix_trening_ex2/)
