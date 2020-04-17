@@ -18,9 +18,10 @@ $this->setFrameMode(true);
 // На странице компонента sections_top.php вывести ссылку, на основании шаблона пути на страницу exampage.php.
 // Для проверки решения подставить в нее тестовые значениями переменных: PARAM1 = 123, PARAM2 = 456.
 // Значения можно подставить с помощью str_replace.
-$url = $arResult['URL_TEMPLATES']['exampage'];
-$url = str_replace(array('#PARAM1#', '#PARAM2#'), array('123', '456'), $url);
-?><?=GetMessage("EXAM_TEXT_LINK_CP_PHOTO")?> <a href="<?=$url?>"><?=$url?></a>  
+$sTemplate = $arResult['URL_TEMPLATES']['exampage'];
+$sUrl = $arResult['FOLDER'] . str_replace(['#PARAM1#', '#PARAM2#'], ['123', '456'], $sTemplate);
+?>
+<?= GetMessage("EXAM_TEXT_LINK_CP_PHOTO")?> <a href="<?=$sUrl?>"><?=$sUrl?></a>
 
 <?$APPLICATION->IncludeComponent(
 	"bitrix:photo.sections.top",
