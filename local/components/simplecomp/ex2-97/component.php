@@ -90,8 +90,6 @@ if ($USER->IsAuthorized()) {
             $this->SetResultCacheKeys(["COUNT"]);
             $this->IncludeComponentTemplate();
         }
-    } else {
-        $this->abortResultCache();
     }
 
     // В компоненте устанавливать заголовок страницы: «Новостей [Количество]». Где Количество – количество выводимых уникальных новостей.

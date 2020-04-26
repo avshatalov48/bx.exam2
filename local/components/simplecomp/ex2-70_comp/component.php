@@ -8,6 +8,7 @@ use \Bitrix\Main\Loader;
 // Подготавливаем пришедшие параметры
 $arParams["IBLOCK_CATALOG_ID"] = (int)$arParams["IBLOCK_CATALOG_ID"];
 $arParams["IBLOCK_NEWS_ID"] = (int)$arParams["IBLOCK_NEWS_ID"];
+$arParams['USER_PROPERTY'] = trim($arParams['USER_PROPERTY']);
 
 if (empty($arParams["CACHE_TIME"])) {
     $arParams["CACHE_TIME"] = 3600;
@@ -17,6 +18,15 @@ if ($this->startResultCache(false, ($arParams["CACHE_GROUPS"] === "N" ? false : 
     if (!Loader::includeModule("iblock")) {
         $this->abortResultCache();
         ShowError(GetMessage("EX2_70_IB_CHECK"));
+        return;
+    }
+
+    if (
+        empty($arParams["IBLOCK_CATALOG_ID"]) ||
+        empty($arParams["IBLOCK_NEWS_ID"]) ||
+        empty($arParams['USER_PROPERTY'])
+    ) {
+        $this->abortResultCache();
         return;
     }
 
@@ -119,8 +129,6 @@ if ($this->startResultCache(false, ($arParams["CACHE_GROUPS"] === "N" ? false : 
     $this->SetResultCacheKeys(['PRODUCT_COUNT']);
 
     $this->IncludeComponentTemplate();
-} else {
-    $this->abortResultCache();
 }
 
 $APPLICATION->SetTitle(GetMessage('EX2_70_ELEMENTS_COUNT') . $arResult['PRODUCT_COUNT']);

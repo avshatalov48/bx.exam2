@@ -183,8 +183,6 @@ if ($this->startResultCache(false, [
     $this->SetResultCacheKeys(["CLASS_COUNT"]);
 
     $this->includeComponentTemplate();
-} else {
-    $this->abortResultCache();
 }
 
 // В компоненте устанавливать заголовок страницы: «Разделов: [Количество]».
