@@ -15,7 +15,7 @@ function CheckUserCount()
 
     // Формируем фильтр по дате
     if (!empty($sLastDate)) {
-        $arFilter = [">=DATE_REGISTER" => $sLastDate];
+        $arFilter = ["DATE_REGISTER_1" => $sLastDate];
     } else {
         $arFilter = [];
     }
