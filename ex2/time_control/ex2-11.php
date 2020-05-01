@@ -8,12 +8,12 @@ $APPLICATION->SetTitle("Оценка производительности: [ex2-
             /products/index.php
         </a>
         <br>
-        Доля нагрузки: 24.17%
+        Среднее время выполнения: 0.1194 сек.
     </p>
 
     <p>
         Больше всего запросов в компоненте: bitrix:catalog.section<br>
-        Количество запросов: 26
+        Количество запросов: 27
     </p>
 
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
