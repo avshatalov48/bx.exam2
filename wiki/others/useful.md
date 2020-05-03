@@ -14,17 +14,19 @@
 
 * [VMware Workstation Player (бесплатен для некоммерческого, личного и домашнего использования)](https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html)
 
+* [Готовый экзамен по Битрикс «№1 Интеграция дизайна и настройка платформы» по платформе «Bitrix Framework» (Версия 2.0.16, 27.02.2019)](https://github.com/avshatalov48/bx.exam1/)
+
 ## GitHub
 
-* [Экзамен Битрикс «№2 Основные технологии, расширение типовых возможностей системы» (bakanyaka)](https://github.com/bakanyaka/bitrix-exam2)
+* [Экзамен Битрикс «№2 Основные технологии, расширение типовых возможностей системы» (bakanyaka)](https://github.com/bakanyaka/bitrix-exam2/)
 
-* [Готовый экзамен №2 (образ VMware, бэкап Битрикс, папка local) (donitz1609)](https://github.com/donitz1609/bitrix.exam2)
+* [Готовый экзамен №2 (образ VMware, бэкап Битрикс, папка local) (donitz1609). Присутствуют задания, которые не вошли в публичные материалы для подготовки.](https://github.com/donitz1609/bitrix.exam2/)
 
 * [bitrix_trening_ex2 (AlexanderBS468)](https://github.com/AlexanderBS468/bitrix_trening_ex2/)
 
 * [start: Exam 2 (RomanIShow)](https://github.com/RomanIShow/start/)
 
-* [ex2all (katrinediakon)](https://github.com/katrinediakon/ex2all)
+* [ex2all (katrinediakon)](https://github.com/katrinediakon/ex2all/)
 
 ## Опыт сдачи экзамена
 

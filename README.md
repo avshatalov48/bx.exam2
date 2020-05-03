@@ -1,7 +1,5 @@
 # Готовый экзамен Битрикс «№2 Основные технологии, расширение типовых возможностей системы» (Версия 4.0.4, 27.02.2019)
 
-[![Donate](https://img.shields.io/badge/Donate-Yandex.Money-green.svg)](https://money.yandex.ru/to/410013131142938)
-
 * [Задания и решения](./wiki/tasks/tasks.md)
 
 * [Полезные ссылки](./wiki/others/useful.md)

@@ -1,0 +1,11 @@
+# Плагин для PHPStorm: https://plugins.jetbrains.com/plugin/7294-editorconfig
+
+# Корневой файл EditorConfig
+root = true
+
+# Для всех файлов используем unix-совместимые переносы строк
+[*]
+# Позволяет выбрать, что использовать на концах строк.
+end_of_line = lf
+# Позволяет убрать пробелы из концов строк
+trim_trailing_whitespace = true
