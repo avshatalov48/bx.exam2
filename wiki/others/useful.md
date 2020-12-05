@@ -8,13 +8,23 @@
 
 * [Форум. Экзамен №2. Вопросы и ответы по заданиям. Часть 1, архив.](https://dev.1c-bitrix.ru/support/forum/forum6/topic83477/)
 
-* [Новая система сертификации партнеров Битрикс (Михаил Базаров)](https://www.youtube.com/watch?v=Gq1AnUsgnZE)
-
 * [Download VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 
 * [VMware Workstation Player (бесплатен для некоммерческого, личного и домашнего использования)](https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html)
 
 * [Готовый экзамен по Битрикс «№1 Интеграция дизайна и настройка платформы» по платформе «Bitrix Framework» (Версия 2.0.16, 27.02.2019)](https://github.com/avshatalov48/bx.exam1/)
+
+## Видео
+
+* [Новая система сертификации партнеров Битрикс (Михаил Базаров)](https://www.youtube.com/watch?v=Gq1AnUsgnZE)
+
+### YouTube-канал "Знания для всех"
+
+* [Экзамен 1С-Битрикс. Основные технологии и расширение типовых возможностей системы. Часть 1](https://www.youtube.com/watch?v=H2JDaAP0Lzs)
+* [Экзамен 1С-Битрикс. Основные технологии и расширение типовых возможностей системы. Часть 2](https://www.youtube.com/watch?v=Gc-qD9TKM6c)
+* [Экзамен 1С-Битрикс. Основные технологии и расширение типовых возможностей системы. Часть 3](https://www.youtube.com/watch?v=-6epr3iFci0)
+* [Экзамен 1С-Битрикс. Основные технологии и расширение типовых возможностей системы. Часть 4](https://www.youtube.com/watch?v=qf34D2T3PP4)
+* [Экзамен 1С-Битрикс. Основные технологии и расширение типовых возможностей системы. Часть 5](https://www.youtube.com/watch?v=zYeikKi3zGM)
 
 ## GitHub
 
@@ -23,8 +33,6 @@
 * [Готовый экзамен №2 (образ VMware, бэкап Битрикс, папка local) (donitz1609). Присутствуют задания, которые не вошли в публичные материалы для подготовки.](https://github.com/donitz1609/bitrix.exam2/)
 
 * [bitrix_trening_ex2 (AlexanderBS468)](https://github.com/AlexanderBS468/bitrix_trening_ex2/)
-
-* [start: Exam 2 (RomanIShow)](https://github.com/RomanIShow/start/)
 
 * [ex2all (katrinediakon)](https://github.com/katrinediakon/ex2all/)
 
